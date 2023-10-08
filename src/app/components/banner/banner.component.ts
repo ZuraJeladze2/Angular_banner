@@ -9,6 +9,8 @@ import { Subscription } from 'rxjs';
 })
 export class BannerComponent implements OnInit, OnDestroy {
   
+  value = 'hello';
+  
   subscription: Subscription | any;
   constructor(private bannerService: BannerService) { 
 
