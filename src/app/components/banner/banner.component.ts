@@ -8,27 +8,44 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit, OnDestroy {
-  
-  value = 'hello';
-  
   subscription: Subscription | any;
-  constructor(private bannerService: BannerService) { 
+  constructor(private bannerService: BannerService) { }
+  
+  value = '';
 
-  }
+  requestBody = {
+    includes: ['name','channelId', 'id'],
+    search: '', // Replace with your search query
+    sortBy: '',
+    sortDirection: '',
+    pageIndex: 0,
+    pageSize: 100,
+  };
+ 
+  
 
   ngOnInit(): void {
     // Example: Fetch a banner by ID
-    const bannerId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
-    this.subscription = this.bannerService.getBannerById(bannerId).subscribe(
-      (response) => {
-        console.log('Banner Data:', response);
-        // Handle the API response here
+    // const bannerId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
+    // this.subscription = this.bannerService.getBannerById(bannerId).subscribe(
+    //   (response) => {
+    //     console.log('Banner Data:', response);
+    //     // Handle the API response here
+    //   },
+    //   (error) => {
+    //     console.error('API Error:', error);
+    //     // Handle errors here
+    //   }
+    // );
+    
+    this.subscription = this.bannerService.getBanners(this.requestBody).subscribe(
+      response => {
+      console.log(response);
       },
-      (error) => {
-        console.error('API Error:', error);
-        // Handle errors here
+      error => {
+        console.log(error);
       }
-    );
+    )
   }
 
   ngOnDestroy(): void {
