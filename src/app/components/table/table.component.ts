@@ -83,7 +83,7 @@ export class TableComponent implements AfterViewInit {
   };
 
   //  სურათი, სათაური, სტატუსი, ზონა, დაწყება-დასრულების თარიღები, ლეიბლები.
-  displayedColumns: string[] = ['img', 'title', 'status', 'label', 'zone', 'startDate', 'endDate'];
+  displayedColumns: string[] = ['img', 'title', 'status', 'label', 'zone', 'dates'];
   dataSource: MatTableDataSource<BannerData> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -91,10 +91,10 @@ export class TableComponent implements AfterViewInit {
 
   constructor(private bannerService: BannerService) {
     // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => fillTable(k + 1));
+    // const users = Array.from({ length: 100 }, (_, k) => fillTable(k + 1));
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+    this.dataSource = new MatTableDataSource();
   }
 
   ngAfterViewInit() {
@@ -118,13 +118,13 @@ export class TableComponent implements AfterViewInit {
           console.log(element);
                  
           return {
-            img: element.img,
-            title: element.title,
-            status: element.status,
-            label: element.label,
-            zone: element.zone,
-            startDate: element.startDate,
-            endDate: element.endDate,
+            img: element.url,
+            title: element.name,
+            status: element.active,
+            label: 'element.label',
+            zone: element.zoneId,
+            dates: `${element.startDate} - ${element.endDate}`,
+            // endDate: element.endDate,
           };
         })),
         catchError(error => {
