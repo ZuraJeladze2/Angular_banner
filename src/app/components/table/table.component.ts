@@ -115,7 +115,7 @@ export class TableComponent implements AfterViewInit {
     this.subscription = this.bannerService.getBanners(this.findRB)
       .pipe(
         map(response => response.data.entities.map((element: any) => {   
-          console.log(element);
+          // console.log(element);
                  
           return {
             img: element.url,
@@ -124,7 +124,6 @@ export class TableComponent implements AfterViewInit {
             label: 'element.label',
             zone: element.zoneId,
             dates: `${element.startDate} - ${element.endDate}`,
-            // endDate: element.endDate,
           };
         })),
         catchError(error => {
