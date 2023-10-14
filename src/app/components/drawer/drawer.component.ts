@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-drawer',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class DrawerComponent {
   showFiller = false;
+  @ViewChild(MatDrawer) drawer: MatDrawer;
 
-  
+  openDrawer(event: MouseEvent): void {
+    event.stopPropagation();
+    this.drawer.toggle();
+  }
 }
