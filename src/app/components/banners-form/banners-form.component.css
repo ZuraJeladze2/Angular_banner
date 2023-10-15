@@ -1,0 +1,5 @@
+app-banners-form{
+  display: flex;
+  flex-flow: column nowrap;
+  background: #000;
+}

@@ -7,46 +7,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
-// export interface UserData {
-//   id: string;
-//   name: string;
-//   progress: string;
-//   fruit: string;
-// }
-
-// const FRUITS: string[] = [
-//   'blueberry',
-//   'lychee',
-//   'kiwi',
-//   'mango',
-//   'peach',
-//   'lime',
-//   'pomegranate',
-//   'pineapple',
-// ];
-// const NAMES: string[] = [
-//   'Maia',
-//   'Asher',
-//   'Olivia',
-//   'Atticus',
-//   'Amelia',
-//   'Jack',
-//   'Charlotte',
-//   'Theodore',
-//   'Isla',
-//   'Oliver',
-//   'Isabella',
-//   'Jasper',
-//   'Cora',
-//   'Levi',
-//   'Violet',
-//   'Arthur',
-//   'Mia',
-//   'Thomas',
-//   'Elizabeth',
-// ];
-
-
 
 export interface BannerData {
   img: string;
@@ -90,10 +50,7 @@ export class TableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private bannerService: BannerService) {
-    // Create 100 users
-    // const users = Array.from({ length: 100 }, (_, k) => fillTable(k + 1));
 
-    // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
   }
 
@@ -115,7 +72,6 @@ export class TableComponent implements AfterViewInit {
     this.subscription = this.bannerService.getBanners(this.findRB)
       .pipe(
         map(response => response.data.entities.map((element: any) => {   
-          // console.log(element);
                  
           return {
             img: element.url,
@@ -176,34 +132,6 @@ export class TableComponent implements AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe from the subscription to prevent memory leaks
     this.subscription.unsubscribe();
   }
 }
-
-
-function fillTable(arg0: number): any {
-
-  return {
-    id: 1,
-    name: 'name',
-    progress: 'progres',
-    fruit: 'fruit',
-  };
-}
-
-
-// function createNewUser(id: number): UserData {
-//   const name =
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))] +
-//     ' ' +
-//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) +
-//     '.';
-
-//   return {
-//     id: id.toString(),
-//     name: name,
-//     progress: Math.round(Math.random() * 100).toString(),
-//     fruit: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-//   };
-// }
