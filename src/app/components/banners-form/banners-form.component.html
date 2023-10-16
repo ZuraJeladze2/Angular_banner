@@ -10,18 +10,17 @@
 <!-- Zone -->
 <mat-form-field>
     <mat-label>Zone</mat-label>
-    <input matInput type="text" [(ngModel)]="formValues.zone">
-    <button *ngIf="formValues.zone" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.zone=''">
-        <mat-icon>close</mat-icon>
-    </button>
+    <mat-select [(ngModel)]="formValues.zone">
+        <mat-option *ngFor="let option of options.zone" value="option">{{ option }}</mat-option>
+    </mat-select>
 </mat-form-field>
 
 <!-- Status -->
 <mat-form-field>
     <mat-label>Status</mat-label>
-    <mat-select>
-        <mat-option value="Active">Active</mat-option>
-        <mat-option value="Inactive">Inactive</mat-option>
+    <mat-select [(ngModel)]="formValues.active">
+        <mat-option value="Active">active</mat-option>
+        <mat-option value="Inactive">inactive</mat-option>
     </mat-select>
 </mat-form-field>
 
@@ -45,9 +44,9 @@
 
 <!-- Label -->
 <mat-form-field>
-    <mat-label>Label</mat-label>
-    <input matInput type="text" [(ngModel)]="formValues.label">
-    <button *ngIf="formValues.label" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.label=''">
-        <mat-icon>close</mat-icon>
-    </button>
+    <mat-label>Zone</mat-label>
+    <mat-select [(ngModel)]="formValues.label">
+        <mat-option *ngFor="let option of options.label" value="option">{{ option }}</mat-option>
+    </mat-select>
 </mat-form-field>
+<button (click)="logForm()">LOG</button>

@@ -68,10 +68,11 @@ export class TableComponent implements AfterViewInit {
     }
   }
 
-  getBannersData() {
-    this.subscription = this.bannerService.getBanners(this.findRB)
+  getBanners(requestBody: object) {
+    this.subscription = this.bannerService.getBannersData(requestBody)
       .pipe(
         map(response => response.data.entities.map((element: any) => {   
+                 console.log(response);
                  
           return {
             img: element.url,
@@ -93,24 +94,6 @@ export class TableComponent implements AfterViewInit {
       });
   }
 
-  getRef(typeIds: ArrayLike<string>) {
-    this.findRB['typeIds'] = typeIds;
-    this.subscription = this.bannerService.getRefData(this.findRB)
-      .pipe(
-        map(async response => {
-          let newArr = await response.data.entities.map((element: ArrayLike<unknown> | { [s: string]: unknown; }) => {
-            return Object.values(element);
-          });
-          console.log(newArr);
-          return response;
-        }),
-        catchError(error => {
-          console.error('API Error:', error);
-          throw error;
-        })
-      )
-      .subscribe();
-  }
 
 
   ngOnInit(): void {
@@ -127,8 +110,7 @@ export class TableComponent implements AfterViewInit {
     //   }
     // );
 
-    this.getBannersData();
-    // this.getRef(typeId);
+    this.getBanners(this.findRB);
   }
 
   ngOnDestroy(): void {
