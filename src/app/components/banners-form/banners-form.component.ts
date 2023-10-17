@@ -11,18 +11,18 @@ import { BannerService } from '../../services/banner-service.service';
 export class BannersFormComponent {
 
 
-  constructor(private http: BannerService){ }
-  
+  constructor(private http: BannerService) { }
+
   //image, title, zone, active, dates, labels
   formValues = {
     title: '',
     zone: '',
-    active: '',
+    active: null,
     startDate: '',
     endDate: '',
     label: ''
   }
-  
+
   blobRB = {  //find Request Body
     blobIds: ['2'],
   };
@@ -41,24 +41,24 @@ export class BannersFormComponent {
     label: []
   }
 
-  logForm(){
+  logForm() {
     console.log(this.formValues);
   }
 
-  getBlobs(){
+  getBlobs() {
     this.http.getBlobsData(this.blobRB)
-    .pipe(
-      map(response => {
-        return response; // You might want to return the response
-      }),
-      catchError(error => {
-        console.error('API Error:', error);
-        throw error;
-      })
-    )
-    .subscribe(data => {
-      console.log(data);
-    });
+      .pipe(
+        map(response => {
+          return response; // You might want to return the response
+        }),
+        catchError(error => {
+          console.error('API Error:', error);
+          throw error;
+        })
+      )
+      .subscribe(data => {
+        console.log(data);
+      });
   }
 
   getRef(typeId: string, opts: string[]) {
@@ -79,9 +79,9 @@ export class BannersFormComponent {
       });
     });
   }
-  
-    ngOnInit(): void {
-      this.getRef('1700', this.options.zone)
-      this.getRef('1900', this.options.label)
-    }
+
+  ngOnInit(): void {
+    this.getRef('1700', this.options.zone)
+    this.getRef('1900', this.options.label)
+  }
 }
