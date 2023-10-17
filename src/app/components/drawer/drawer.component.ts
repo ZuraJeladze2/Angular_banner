@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { BannerService } from '../../services/banner-service.service';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Subscription, catchError, map } from 'rxjs';
+import { BannerData } from '../table/table.component';
+import { BannersFormComponent } from '../banners-form/banners-form.component';
 
 @Component({
   selector: 'app-drawer',
@@ -10,13 +12,17 @@ import { Subscription, catchError, map } from 'rxjs';
 })
 export class DrawerComponent {
   showFiller = false;
-  @ViewChild(MatDrawer) drawer: MatDrawer;
   subscription: Subscription | any;
 
+  
+  
+  @ViewChild(MatDrawer) drawer: MatDrawer;
+  @ViewChild(BannersFormComponent) bannerForm: BannersFormComponent;
   constructor(private bannerService: BannerService) {}
 
   
-  openDrawer(event: MouseEvent): void {
+  openDrawer(event?: MouseEvent): void {
+    if(event)
     event.stopPropagation();
     this.drawer.toggle();
   }
@@ -51,5 +57,13 @@ export class DrawerComponent {
   getRefClick(){
     let chooseTypeId = prompt('pass type id:');
     this.getRef(chooseTypeId);
+  }
+
+  handleRowClick(obj: {event: MouseEvent, row: BannerData}){
+    console.log(obj.row);
+    this.bannerForm.formValues = obj.row;
+    console.log(this.bannerForm.formValues);
+    
+    this.openDrawer(obj.event);
   }
 }

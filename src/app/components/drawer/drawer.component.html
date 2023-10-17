@@ -13,7 +13,7 @@
         <button class="toggle" type="button" mat-raised-button (click)="openDrawer($event)">
             Toggle sidenav
         </button>
-        <app-table></app-table>
+        <app-table (rowClicked)="handleRowClick($event)"></app-table>
 
     </div>
 </mat-drawer-container>

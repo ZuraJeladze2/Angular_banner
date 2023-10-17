@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { BannerService } from '../../services/banner-service.service';
 import { Subscription, catchError, map } from 'rxjs';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -6,12 +6,12 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatDrawer } from '@angular/material/sidenav';
 
 export interface BannerData {
   img: string;
   title: string;
-  status: boolean;
+  active: boolean;
   label: string;
   zone: string;
   startDate: string;
@@ -30,7 +30,6 @@ export class TableComponent implements AfterViewInit {
 
   subscription: Subscription | any;
 
-  value = '';
 
   findRB = {  //find Request Body
     includes: [],
@@ -43,9 +42,10 @@ export class TableComponent implements AfterViewInit {
   };
 
   //  სურათი, სათაური, სტატუსი, ზონა, დაწყება-დასრულების თარიღები, ლეიბლები.
-  displayedColumns: string[] = ['img', 'title', 'status', 'label', 'zone', 'dates'];
+  displayedColumns: string[] = ['img', 'title', 'active', 'label', 'zone', 'dates'];
   dataSource: MatTableDataSource<BannerData> = new MatTableDataSource();
 
+  @ViewChild(MatDrawer) drawer: MatDrawer;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -77,7 +77,7 @@ export class TableComponent implements AfterViewInit {
           return {
             img: element.url,
             title: element.name,
-            status: element.active,
+            active: element.active,
             label: 'element.label',
             zone: element.zoneId,
             dates: `${element.startDate} - ${element.endDate}`,
@@ -94,6 +94,10 @@ export class TableComponent implements AfterViewInit {
       });
   }
 
+  @Output() rowClicked = new EventEmitter<any>();
+  onRowClicked(event: MouseEvent, row: any){
+    this.rowClicked.emit({event, row});
+  }
 
 
   ngOnInit(): void {
@@ -112,6 +116,8 @@ export class TableComponent implements AfterViewInit {
 
     this.getBanners(this.findRB);
   }
+
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
