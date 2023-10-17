@@ -1,3 +1,7 @@
+<!-- image -->
+    <button type="button" mat-raised-button color="secondary" (click)="fileInput.click()">Choose File</button>
+    <input hidden #fileInput (change)="onFileSelected($event)" type="file" id="file" [(ngModel)]="formValues.img">
+
 <!-- Title -->
 <mat-form-field>
     <mat-label>Title</mat-label>
