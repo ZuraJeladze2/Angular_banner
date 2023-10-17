@@ -13,7 +13,6 @@ import { BannersFormComponent } from '../banners-form/banners-form.component';
 export class DrawerComponent {
   showFiller = false;
   subscription: Subscription | any;
-
   
   
   @ViewChild(MatDrawer) drawer: MatDrawer;

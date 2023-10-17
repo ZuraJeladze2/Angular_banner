@@ -15,16 +15,17 @@ export class BannersFormComponent {
 
   //image, title, zone, active, dates, labels
   formValues = {
+    img: null,
     title: '',
-    zone: '',
+    zone: null,
     active: null,
     startDate: '',
     endDate: '',
-    label: ''
+    label: null
   }
 
   blobRB = {  //find Request Body
-    blobIds: ['2'],
+    blobIds: [''],
   };
   refRB = {
     includes: [],
@@ -43,6 +44,18 @@ export class BannersFormComponent {
 
   logForm() {
     console.log(this.formValues);
+    this.http.getBlobsData(this.blobRB)
+    .pipe(
+      map(response => {
+        console.log(response);
+      }),
+      catchError(error => {
+        console.log(error);
+        throw error;
+      })
+    ).subscribe(data => {
+      console.log(data);
+    });
   }
 
   getBlobs() {
@@ -80,8 +93,19 @@ export class BannersFormComponent {
     });
   }
 
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      // this.formValues.img = file; // Set the selected file to the img property
+      console.log('Selected file:', file);
+    }
+  }
+
   ngOnInit(): void {
     this.getRef('1700', this.options.zone)
     this.getRef('1900', this.options.label)
   }
+
+
 }
