@@ -17,6 +17,7 @@ export class BannerService {
 
   //#region blobAPI
   private findBlob = 'https://development.api.optio.ai/api/v2/blob/find' 
+  private uploadBlob = 'https://development.api.optio.ai/api/v2/blob/upload' 
   //#endregion
   
   //#region refAPI
@@ -62,5 +63,13 @@ export class BannerService {
       'Authorization': this.accessToken
     });
     return this.http.post(this.findBlob, queryString, { headers: headers })
+  }
+
+  uploadBlobsData(queryString: any): Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.accessToken
+    });
+    return this.http.post(this.uploadBlob, queryString, { headers: headers })
   }
 }

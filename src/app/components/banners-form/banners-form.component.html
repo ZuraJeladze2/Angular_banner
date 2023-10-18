@@ -1,12 +1,22 @@
 <!-- image -->
     <button type="button" mat-raised-button color="secondary" (click)="fileInput.click()">Choose File</button>
-    <input hidden #fileInput (change)="onFileSelected($event)" type="file" id="file" [(ngModel)]="formValues.img">
+    <br>
+    <input hidden #fileInput (change)="onFileSelected($event)" type="file" id="file">
 
-<!-- Title -->
+<!-- Name -->
 <mat-form-field>
-    <mat-label>Title</mat-label>
-    <input matInput type="text" [(ngModel)]="formValues.title">
-    <button *ngIf="formValues.title" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.title=''">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" [(ngModel)]="formValues.name">
+    <button *ngIf="formValues.name" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.name=''">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-form-field>
+
+<!-- Priority -->
+<mat-form-field>
+    <mat-label>Priority</mat-label>
+    <input matInput type="text" [(ngModel)]="formValues.priority">
+    <button *ngIf="formValues.priority" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.priority=''">
         <mat-icon>close</mat-icon>
     </button>
 </mat-form-field>
@@ -14,8 +24,24 @@
 <!-- Zone -->
 <mat-form-field>
     <mat-label>Zone</mat-label>
-    <mat-select [(ngModel)]="formValues.zone">
-        <mat-option *ngFor="let option of options.zone" value="option">{{ option }}</mat-option>
+    <mat-select [(ngModel)]="formValues.zoneId">
+        <mat-option *ngFor="let option of options.zoneId" value="zoneId">{{ option }}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<!-- Channel -->
+<mat-form-field>
+    <mat-label>Channel</mat-label>
+    <mat-select [(ngModel)]="formValues.channelId">
+        <mat-option *ngFor="let option of options.channelId" value="channelId">{{ option }}</mat-option>
+    </mat-select>
+</mat-form-field>
+
+<!-- Language -->
+<mat-form-field>
+    <mat-label>Language</mat-label>
+    <mat-select [(ngModel)]="formValues.language">
+        <mat-option *ngFor="let option of options.language" value="language">{{ option }}</mat-option>
     </mat-select>
 </mat-form-field>
 
@@ -48,9 +74,9 @@
 
 <!-- Label -->
 <mat-form-field>
-    <mat-label>Zone</mat-label>
-    <mat-select [(ngModel)]="formValues.label">
-        <mat-option *ngFor="let option of options.label" value="option">{{ option }}</mat-option>
+    <mat-label>label</mat-label>
+    <mat-select [(ngModel)]="formValues.labels" multiple>
+        <mat-option *ngFor="let option of options.labels" [value]="option">{{ option }}</mat-option>
     </mat-select>
 </mat-form-field>
-<button (click)="logForm()">LOG</button>
+<button (click)="saveBanner()">Save</button>
