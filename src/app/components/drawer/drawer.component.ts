@@ -43,7 +43,7 @@ export class DrawerComponent {
     this.subscription = this.bannerService.getRefData(this.findRB)
       .pipe(
         map(response => {
-          console.log(response);
+          // console.log(response);
         }),
         catchError(error => {
           console.error('API Error:', error);
@@ -59,7 +59,6 @@ export class DrawerComponent {
   }
 
   handleRowClick(obj: {event: MouseEvent, row: BannerData}){
-    console.log(obj.row);
     this.bannerForm.formValues = obj.row;
     console.log(this.bannerForm.formValues);
     

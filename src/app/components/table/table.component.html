@@ -13,9 +13,9 @@
     </ng-container>
 
     <!-- title Column -->
-    <ng-container matColumnDef="title">
+    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
-      <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.name}} </td>
     </ng-container>
 
     <!-- status Column -->
@@ -25,15 +25,15 @@
     </ng-container>
 
     <!-- label Column -->
-    <ng-container matColumnDef="label">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
-      <td mat-cell *matCellDef="let row"> {{row.label}} </td>
+    <ng-container matColumnDef="labels">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Labels </th>
+      <td mat-cell *matCellDef="let row"> {{row.labels}} </td>
     </ng-container>
 
     <!-- zone Column -->
     <ng-container matColumnDef="zone">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> zone </th>
-      <td mat-cell *matCellDef="let row"> {{row.zone}} </td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Zone </th>
+      <td mat-cell *matCellDef="let row"> {{row.zoneId}} </td>
     </ng-container>
 
     <!-- startDate Column -->

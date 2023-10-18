@@ -10,10 +10,15 @@ import { MatDrawer } from '@angular/material/sidenav';
 
 export interface BannerData {
   img: string;
-  title: string;
+  name: string;
   active: boolean;
-  label: string;
-  zone: string;
+  labels: string[];
+  zoneId: string;
+  channelId: string;
+  fileId: string;
+  priority: number;
+  url: string;
+  language: string;
   startDate: string;
   endDate: string;
 }
@@ -42,7 +47,7 @@ export class TableComponent implements AfterViewInit {
   };
 
   //  სურათი, სათაური, სტატუსი, ზონა, დაწყება-დასრულების თარიღები, ლეიბლები.
-  displayedColumns: string[] = ['img', 'title', 'active', 'label', 'zone', 'dates'];
+  displayedColumns: string[] = ['img', 'name', 'active', 'labels', 'zone', 'dates'];
   dataSource: MatTableDataSource<BannerData> = new MatTableDataSource();
 
   @ViewChild(MatDrawer) drawer: MatDrawer;
@@ -72,14 +77,14 @@ export class TableComponent implements AfterViewInit {
     this.subscription = this.bannerService.getBannersData(requestBody)
       .pipe(
         map(response => response.data.entities.map((element: any) => {   
-                 console.log(response);
+                 console.log(element);
                  
           return {
             img: element.url,
-            title: element.name,
+            name: element.name,
             active: element.active,
-            label: 'element.label',
-            zone: element.zoneId,
+            labels: [...element.labels],
+            zoneId: element.zoneId,
             dates: `${element.startDate} - ${element.endDate}`,
           };
         })),
@@ -89,7 +94,6 @@ export class TableComponent implements AfterViewInit {
         })
       )
       .subscribe(async data => {
-        console.log(data);
         this.dataSource.data = data;
       });
   }
