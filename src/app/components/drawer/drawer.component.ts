@@ -60,7 +60,8 @@ export class DrawerComponent {
 
   handleRowClick(obj: {event: MouseEvent, row: BannerData}){
     this.bannerForm.formValues = obj.row;
-    console.log(this.bannerForm.formValues);
+    console.warn(this.bannerForm.formValues);
+    console.log(obj.row);
     
     this.openDrawer(obj.event);
   }

@@ -19,6 +19,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSelectModule } from '@angular/material/select';
 import { BannersFormComponent } from './components/banners-form/banners-form.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BannersFormComponent } from './components/banners-form/banners-form.com
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    CommonModule,
   ],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
