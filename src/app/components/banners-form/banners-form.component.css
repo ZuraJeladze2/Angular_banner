@@ -3,3 +3,10 @@ app-banners-form{
   flex-flow: column nowrap;
   background: #000;
 }
+.dates{
+  display: flex;
+  justify-content: space-between;
+}
+.dates mat-form-field{
+  width: 250px;
+}

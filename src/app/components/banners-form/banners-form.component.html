@@ -1,7 +1,7 @@
 <!-- image -->
-    <button type="button" mat-raised-button color="secondary" (click)="fileInput.click()">Choose File</button>
-    <br>
-    <input hidden #fileInput (change)="onFileSelected($event)" type="file" id="file">
+<button type="button" mat-raised-button color="accent" (click)="fileInput.click()">Choose File</button>
+<br>
+<input hidden #fileInput (change)="onFileSelected($event)" type="file" id="file">
 
 <!-- Name -->
 <mat-form-field>
@@ -54,23 +54,26 @@
     </mat-select>
 </mat-form-field>
 
-<!-- Start date -->
-<mat-form-field>
-    <mat-label>Start date</mat-label>
-    <input matInput type="date" [(ngModel)]="formValues.startDate">
-    <button *ngIf="formValues.startDate" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.startDate=''">
-        <mat-icon>close</mat-icon>
-    </button>
-</mat-form-field>
+<div class="dates">
+    <!-- Start date -->
+    <mat-form-field>
+        <mat-label>Start date</mat-label>
+        <input matInput type="date" [(ngModel)]="formValues.startDate">
+        <button *ngIf="formValues.startDate" matSuffix mat-icon-button aria-label="Clear"
+            (click)="formValues.startDate=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
 
-<!-- End date -->
-<mat-form-field>
-    <mat-label>End date</mat-label>
-    <input matInput type="date" [(ngModel)]="formValues.endDate">
-    <button *ngIf="formValues.endDate" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.endDate=''">
-        <mat-icon>close</mat-icon>
-    </button>
-</mat-form-field>
+    <!-- End date -->
+    <mat-form-field>
+        <mat-label>End date</mat-label>
+        <input matInput type="date" [(ngModel)]="formValues.endDate">
+        <button *ngIf="formValues.endDate" matSuffix mat-icon-button aria-label="Clear" (click)="formValues.endDate=''">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+</div>
 
 <!-- Label -->
 <mat-form-field>
@@ -79,4 +82,4 @@
         <mat-option *ngFor="let option of options.labels" [value]="option">{{ option }}</mat-option>
     </mat-select>
 </mat-form-field>
-<button (click)="saveBanner()">Save</button>
+<button mat-raised-button color="primary" (click)="saveBanner()">Save</button>

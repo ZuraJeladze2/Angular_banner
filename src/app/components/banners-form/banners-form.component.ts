@@ -28,11 +28,6 @@ export class BannersFormComponent {
     url: '',
     priority: null,
   }
-
-  blobRB = {  //find Request Body
-    blobIds: [''],
-  };
-
   
   refRB = {
     includes: [],
@@ -74,22 +69,7 @@ export class BannersFormComponent {
     });
   }
 
-  // getBlobs() {
-  //   this.httpBanner.getBlobsData(this.blobRB)
-  //     .pipe(
-  //       map(response => {
-  //         return response;
-  //       }),
-  //       catchError(error => {
-  //         console.error('API Error:', error);
-  //         throw error;
-  //       })
-  //     )
-  //     .subscribe(data => {
-  //       console.log(data);
-  //     });
-  // }
-
+ 
   generateBoundary(): string {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let boundary = '--';
