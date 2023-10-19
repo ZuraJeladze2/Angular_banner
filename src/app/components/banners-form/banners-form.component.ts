@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DrawerComponent } from '../drawer/drawer.component';
 import { Subscription, catchError, map } from 'rxjs';
 import { BannerService } from '../../services/banner-service.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-banners-form',
@@ -89,17 +90,34 @@ export class BannersFormComponent {
   //     });
   // }
 
+  generateBoundary(): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let boundary = '--';
+    for (let i = 0; i < 16; i++) {
+      boundary += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return boundary;
+  }
+  
+  
+  
   uploadBlobs(image: File) {
     const formData = new FormData();
     formData.set('blob', image);
     // console.log(formData);
+    let boundary = this.generateBoundary();
+    const headers = new HttpHeaders({
+      'Authorization': this.httpBanner.accessToken
+    });
   
-    this.httpBanner.uploadBlobsData(formData).subscribe(
+    this.httpBanner.uploadBlobsData(formData, headers).subscribe(
       response => {
-        // console.log(response);
+        console.log(response);
+        this.formValues.fileId = response.data.id;
+        console.warn(this.formValues)
       },
       error => {
-        // console.error(error);
+        console.error(error);
       }
     );
   }

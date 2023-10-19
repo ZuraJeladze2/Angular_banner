@@ -65,11 +65,7 @@ export class BannerService {
     return this.http.post(this.findBlob, queryString, { headers: headers })
   }
 
-  uploadBlobsData(queryString: any): Observable<any>{
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.accessToken
-    });
+  uploadBlobsData(queryString: any, headers): Observable<any>{
     return this.http.post(this.uploadBlob, queryString, { headers: headers })
   }
 }
