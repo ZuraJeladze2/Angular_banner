@@ -33,7 +33,6 @@ export class BannersFormComponent {
     includes: [],
     search: '', 
     sortBy: '',
-    // typeIds: null,
     sortDirection: '',
     pageIndex: 0,
     pageSize: 100,
@@ -84,7 +83,6 @@ export class BannersFormComponent {
   uploadBlobs(image: File) {
     const formData = new FormData();
     formData.set('blob', image);
-    // console.log(formData);
     let boundary = this.generateBoundary();
     const headers = new HttpHeaders({
       'Authorization': this.httpBanner.accessToken
@@ -92,7 +90,6 @@ export class BannersFormComponent {
   
     this.httpBanner.uploadBlobsData(formData, headers).subscribe(
       response => {
-        console.log(response);
         this.formValues.fileId = response.data.id;
         console.warn(this.formValues)
       },
@@ -107,11 +104,9 @@ export class BannersFormComponent {
     this.refRB['typeId'] = typeId;
     this.httpBanner.getRefData(this.refRB).pipe(
       map(response => {
-        // console.log(response);
         return response.data.entities.map(item => item.name);
       }),
       catchError(error => {
-        // console.log(error);
         throw error;
       })
     ).subscribe(data => {
@@ -125,8 +120,6 @@ export class BannersFormComponent {
     const file: File = event.target.files[0];
 
     if (file) {
-      // this.formValues.img = file; // Set the selected file to the img property
-      console.log('Selected file:', file);
       this.uploadBlobs(file);
     }
   }

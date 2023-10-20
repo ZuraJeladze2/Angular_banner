@@ -39,23 +39,7 @@ export class DrawerComponent {
   
   getRef(typeIds: ArrayLike<string>) {
     this.findRB['typeIds'] = [typeIds];
-    
-    this.subscription = this.bannerService.getRefData(this.findRB)
-      .pipe(
-        map(response => {
-          // console.log(response);
-        }),
-        catchError(error => {
-          console.error('API Error:', error);
-          throw error;
-        })
-      )
-      .subscribe();
-  }
-
-  getRefClick(){
-    let chooseTypeId = prompt('pass type id:');
-    this.getRef(chooseTypeId);
+    this.subscription = this.bannerService.getRefData(this.findRB).subscribe();
   }
 
   handleRowClick(obj: {event: MouseEvent, row: BannerData}){

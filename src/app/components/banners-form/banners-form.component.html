@@ -25,7 +25,7 @@
 <mat-form-field>
     <mat-label>Zone</mat-label>
     <mat-select [(ngModel)]="formValues.zoneId">
-        <mat-option *ngFor="let option of options.zoneId" value="zoneId">{{ option }}</mat-option>
+        <mat-option *ngFor="let option of options.zoneId" [value]="option">{{ option }}</mat-option>
     </mat-select>
 </mat-form-field>
 
@@ -33,26 +33,28 @@
 <mat-form-field>
     <mat-label>Channel</mat-label>
     <mat-select [(ngModel)]="formValues.channelId">
-        <mat-option *ngFor="let option of options.channelId" value="channelId">{{ option }}</mat-option>
+        <mat-option *ngFor="let option of options.channelId" [value]="option">{{ option }}</mat-option>
     </mat-select>
 </mat-form-field>
 
-<!-- Language -->
-<mat-form-field>
-    <mat-label>Language</mat-label>
-    <mat-select [(ngModel)]="formValues.language">
-        <mat-option *ngFor="let option of options.language" value="language">{{ option }}</mat-option>
-    </mat-select>
-</mat-form-field>
+<div class="dates">
+    <!-- Language -->
+    <mat-form-field>
+        <mat-label>Language</mat-label>
+        <mat-select [(ngModel)]="formValues.language">
+            <mat-option *ngFor="let option of options.language" [value]="option">{{ option }}</mat-option>
+        </mat-select>
+    </mat-form-field>
 
-<!-- Status -->
-<mat-form-field>
-    <mat-label>Status</mat-label>
-    <mat-select [(ngModel)]="formValues.active">
-        <mat-option value="Active">active</mat-option>
-        <mat-option value="Inactive">inactive</mat-option>
-    </mat-select>
-</mat-form-field>
+    <!-- Status -->
+    <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="formValues.active">
+            <mat-option value="Active">active</mat-option>
+            <mat-option value="Inactive">inactive</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
 
 <div class="dates">
     <!-- Start date -->
