@@ -42,7 +42,7 @@
     <!-- startDate Column -->
     <ng-container matColumnDef="dates">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Dates </th>
-      <td mat-cell *matCellDef="let row"> {{row.startDate}} - {{row.endDate}} </td>
+      <td mat-cell *matCellDef="let row"> {{row.startDate.split('T')[0]}} --- {{row.endDate.split('T')[0]}} </td>
     </ng-container>
 
     <!-- endDate Column -->
