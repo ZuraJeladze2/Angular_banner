@@ -78,8 +78,6 @@ export class TableComponent implements AfterViewInit {
     this.bannerService.getBlobsData(id, action)
       .pipe(
         map(response => {
-          console.warn(id, action);
-          
           return response;
         }),
         catchError(error => {
@@ -128,10 +126,11 @@ export class TableComponent implements AfterViewInit {
     return this.bannerService.getBlobsData(fileId, 'download').pipe(
       map((blob: Blob) => {
         const objectURL = URL.createObjectURL(blob);
-        return this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        return this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
       })
     );
   }
+  
   
 
   
@@ -143,20 +142,8 @@ export class TableComponent implements AfterViewInit {
 
 
   ngOnInit(): void {
-    // Example: Fetch a banner by ID
-    // const bannerId = '3fa85f64-5717-4562-b3fc-2c963f66afa6';
-    // this.subscription = this.bannerService.getBannerById(bannerId).subscribe(
-    //   (response) => {
-    //     console.log('Banner Data:', response);
-    //     // Handle the API response here
-    //   },
-    //   (error) => {
-    //     console.error('API Error:', error);
-    //     // Handle errors here
-    //   }
-    // );
     this.getBlobs("4760455682525861", 'download')
-    console.warn(this.getBannerImage('4760455682525861'))
+    // console.warn(this.getBannerImage('4760455682525861'))
     this.getBanners(this.findRB);
 
   }
