@@ -35,7 +35,7 @@ export class TableComponent implements AfterViewInit {
 
 
   subscription: Subscription | any;
-
+  blobUrl: string = 'https://development.api.optio.ai/api/v2/blob/'
 
   findRB = {  //find Request Body
     includes: [],
@@ -55,7 +55,7 @@ export class TableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private bannerService: BannerService, private sanitizer: DomSanitizer) {
+  constructor(private bannerService: BannerService) {
 
     this.dataSource = new MatTableDataSource();
   }
@@ -122,13 +122,8 @@ export class TableComponent implements AfterViewInit {
 
 
 
-  getBannerImage(fileId: string): Observable<SafeResourceUrl> {
-    return this.bannerService.getBlobsData(fileId, 'download').pipe(
-      map((blob: Blob) => {
-        const objectURL = URL.createObjectURL(blob);
-        return this.sanitizer.bypassSecurityTrustResourceUrl(objectURL);
-      })
-    );
+  getBannerImage(fileId: string){
+    return this.blobUrl + fileId;
   }
   
   
@@ -142,8 +137,9 @@ export class TableComponent implements AfterViewInit {
 
 
   ngOnInit(): void {
-    this.getBlobs("4760455682525861", 'download')
+    // this.getBlobs("4760455682525861", 'download')
     // console.warn(this.getBannerImage('4760455682525861'))
+    // this.getBannerImage('4760455682525861');
     this.getBanners(this.findRB);
 
   }

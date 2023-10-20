@@ -5,3 +5,7 @@
 table{
     width: 100%;
 }
+td img{
+    width: 200px;
+    object-fit: cover;
+}
