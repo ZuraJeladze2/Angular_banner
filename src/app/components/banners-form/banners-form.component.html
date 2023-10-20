@@ -1,5 +1,5 @@
 <!-- image -->
-<button type="button" mat-raised-button color="accent" (click)="fileInput.click()">Choose File</button>
+<button type="button" mat-button (click)="fileInput.click()">Choose Image</button>
 <br>
 <input hidden #fileInput (change)="onFileSelected($event)" type="file" id="file">
 
@@ -84,4 +84,6 @@
         <mat-option *ngFor="let option of options.labels" [value]="option">{{ option }}</mat-option>
     </mat-select>
 </mat-form-field>
-<button mat-raised-button color="primary" (click)="saveBanner()">Save</button>
+<h3 *ngIf="bannerSent"> Submited successfully! </h3>
+<h3 *ngIf="bannerNotSent" style="color:red"> Submit failed! </h3>
+<button mat-raised-button color="primary" (click)="saveBanner()">Submit</button>

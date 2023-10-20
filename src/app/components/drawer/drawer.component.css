@@ -8,8 +8,8 @@
 
 .sidenav-content {
   display: flex;
-  height: 100%;
   align-items: center;
+  flex-flow: column nowrap;
   justify-content: center;
   padding: 30px;
 }
@@ -17,7 +17,7 @@
 
 .sidenav-content button.toggle{
   position: fixed;
-  top: 10px;
+  top: 20px;
   right: 30px;
   transition: opacity 0.3s ease-in-out;
 }
