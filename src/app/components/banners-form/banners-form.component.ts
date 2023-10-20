@@ -45,6 +45,8 @@ export class BannersFormComponent {
     channelId:[]
   }
 
+  bannerSent: boolean = false;
+  bannerNotSent: boolean = false;
   saveBanner() {
     if(this.formValues.active === 'Active'){
       this.formValues.active = true;
@@ -57,10 +59,21 @@ export class BannersFormComponent {
     this.httpBanner.saveBannersData(this.formValues)
     .pipe(
       map(response => {
+        if(response){
+          this.bannerSent = true;
+          setTimeout(() => {
+            this.bannerSent = false;
+          }, 2000);
+        }
         return response;
       }),
       catchError(error => {
-        console.log(error);
+        if(error){
+          this.bannerNotSent = true;
+          setTimeout(() => {
+            this.bannerNotSent = false;
+          }, 2000);
+        }
         throw error;
       })
     ).subscribe(data => {

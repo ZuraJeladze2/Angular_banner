@@ -13,17 +13,30 @@ import { BannersFormComponent } from '../banners-form/banners-form.component';
 export class DrawerComponent {
   showFiller = false;
   subscription: Subscription | any;
-  
-  
+
+
   @ViewChild(MatDrawer) drawer: MatDrawer;
   @ViewChild(BannersFormComponent) bannerForm: BannersFormComponent;
-  constructor(private bannerService: BannerService) {}
+  constructor(private bannerService: BannerService) { }
 
-  
+
   openDrawer(event?: MouseEvent): void {
-    if(event)
-    event.stopPropagation();
+    if (event)
+      event.stopPropagation();
     this.drawer.toggle();
+    this.bannerForm.formValues = {
+      name: '',
+      active: null,
+      labels: [],
+      zoneId: '',
+      channelId: '',
+      fileId: '',
+      priority: null,
+      url: '',
+      language: '',
+      startDate: '',
+      endDate: ''
+    };
   }
 
   findRB = {  //find Request Body
@@ -36,17 +49,17 @@ export class DrawerComponent {
     pageSize: 100,
   };
 
-  
+
   getRef(typeIds: ArrayLike<string>) {
     this.findRB['typeIds'] = [typeIds];
     this.subscription = this.bannerService.getRefData(this.findRB).subscribe();
   }
 
-  handleRowClick(obj: {event: MouseEvent, row: BannerData}){
+  handleRowClick(obj: { event: MouseEvent, row: BannerData }) {
+    this.openDrawer(obj.event);
     this.bannerForm.formValues = obj.row;
     console.warn(this.bannerForm.formValues);
     console.log(obj.row);
-    
-    this.openDrawer(obj.event);
+
   }
 }
